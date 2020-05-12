@@ -12,6 +12,8 @@
 #pragma once
 #pragma warning(disable : 4996)
 
+typedef CHAR*(CALLBACK* LPFNDLLFUNC1)();
+
 using namespace std;
 using namespace nmspace;
 
@@ -174,8 +176,44 @@ int main()
 
 		case 10:
 			system("cls");
-			//dq.ReadFromFile();
+			dq.ZeroingValues(); // Обнуляем значения дэка
 
+			HINSTANCE hDLL;               // Handle to DLL
+			LPFNDLLFUNC1 lpfnDllFunc1;    // Function pointer
+			char* buffer;
+
+			hDLL = LoadLibrary("DequeDLL");
+			if (hDLL != NULL)
+			{
+				lpfnDllFunc1 = (LPFNDLLFUNC1)GetProcAddress((HMODULE)hDLL, "ReadFromFile");
+				if (!lpfnDllFunc1)
+				{
+					// handle the error
+					FreeLibrary(hDLL);
+					cout << "Функция не найдена!" << endl;
+				}
+				else
+				{
+					// call the function
+					buffer = lpfnDllFunc1();
+					char *ptr;
+
+					if ((ptr = strtok(buffer, ";")) != nullptr) {
+						dq.AddEnd(atoi(ptr));
+						ptr = strtok(0, ";");
+
+						while (ptr) {
+							dq.AddEnd(atoi(ptr));
+
+							ptr = strtok(0, ";");
+						}
+					}
+				}
+			}
+			else
+				cout << "Библиотека не загрузилась!" << endl;
+
+			
 			bufferConstChar = "Дек успешно считан из файла, можете посмотреть результат, выбрав 8 пункт меню\n";
 			WriteFile(hOut, bufferConstChar, strlen(bufferConstChar), &bufferDWORD, NULL);
 

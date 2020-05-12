@@ -14,6 +14,7 @@ class Deque
 		Deque(); // Созание дека
 		~Deque(); // Очищение памяти
 		void DequeString(std::string& str); // Переводит дэк в строку
+		void ZeroingValues(); // Обнуляет все данные дэка
 		int SizeDeque(); // Размер дека
 		void OutputAll(); // вывести все элементы дека
 		void OutputEnd(); // Выводит последний элемент

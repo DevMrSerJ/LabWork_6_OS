@@ -43,6 +43,12 @@ void Deque::DequeString(string& str)
 	}
 }
 
+void Deque::ZeroingValues()
+{
+	deque.resize(0); // Задаём 0 длину
+	length = 0; // Храним длину равную 0
+}
+
 int Deque::SizeDeque()
 {
 	return length;
