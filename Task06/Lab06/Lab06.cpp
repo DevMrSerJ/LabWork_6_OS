@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "Deque.h"
+#include "DequeDLL.h"
 #include <list>
 #include <iostream>
 #include <string.h>
@@ -12,6 +13,7 @@
 #pragma warning(disable : 4996)
 
 using namespace std;
+using namespace nmspace;
 
 #define STRLEN(x) (sizeof(x)/sizeof(TCHAR) - 1)
 
@@ -82,6 +84,9 @@ int main()
 		ReadFile(hIn, bufferCharArr, 4, &bufferDWORD, NULL);
 
 		int n = atoi(bufferCharArr);
+
+		string strDeq = "";
+		LPCSTR LPCStrDeque;
 
 		switch (n)
 		{
@@ -157,7 +162,10 @@ int main()
 
 		case 9:
 			system("cls");
-			dq.WriteToFile();
+			dq.DequeString(strDeq);
+			LPCStrDeque = strDeq.c_str();
+
+			DequeDLL::WriteToFile(LPCStrDeque);
 
 			bufferConstChar = "Дек успешно записан в файл\n";
 			WriteFile(hOut, bufferConstChar, strlen(bufferConstChar), &bufferDWORD, NULL);
@@ -166,7 +174,7 @@ int main()
 
 		case 10:
 			system("cls");
-			dq.ReadFromFile();
+			//dq.ReadFromFile();
 
 			bufferConstChar = "Дек успешно считан из файла, можете посмотреть результат, выбрав 8 пункт меню\n";
 			WriteFile(hOut, bufferConstChar, strlen(bufferConstChar), &bufferDWORD, NULL);

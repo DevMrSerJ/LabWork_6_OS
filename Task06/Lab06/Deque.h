@@ -13,6 +13,7 @@ class Deque
 
 		Deque(); // Созание дека
 		~Deque(); // Очищение памяти
+		void DequeString(std::string& str); // Переводит дэк в строку
 		int SizeDeque(); // Размер дека
 		void OutputAll(); // вывести все элементы дека
 		void OutputEnd(); // Выводит последний элемент
@@ -21,6 +22,4 @@ class Deque
 		void DeleteEnd(); //Удалить последний элемент
 		void AddStart(int value); // Добавить элемент в начало
 		void AddEnd(int value); // Добавить элемент в конец
-		void WriteToFile(); // Записать дек в файл
-		void ReadFromFile(); // Считать дек из файла
 };
